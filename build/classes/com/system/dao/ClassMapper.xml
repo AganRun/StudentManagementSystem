@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.ClassMapper">
+
+
+	<select id="queryClassInfoById" parameterType="java.lang.String" resultType="com.system.entity.ClassEntity">
+		select * from class where class_no = #{value} 
+	</select>
+	
+	<select id="queryAllClassInfo"  resultType="com.system.entity.ClassEntity" >
+		select * from class where 1 = 1
+	</select>
+	
+	<insert id="addClass" parameterType="com.system.entity.ClassEntity">
+		insert into class (class_no, class_name, class_department, class_teacher_no, class_addtime)
+		values( #{class_no}, #{class_name}, #{class_department}, #{class_teacher_no}, #{class_addtime})
+	</insert>
+	
+	<select id="getMaxClass_no" resultType="java.lang.String">
+		select MAX(class_no) from class
+	</select>
+	
+	<delete id="deleteClass" parameterType="java.lang.String">
+		delete from class where class_no = #{value}
+	</delete>
+	
+	<update id="saveClass">
+		update class set  class_name = #{class_name}, class_department = #{class_department}, 
+		class_teacher_no = #{class_teacher_no} where class_no = #{class_no}
+	</update>
+</mapper>

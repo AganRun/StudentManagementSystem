@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.StuMapper">
+
+
+	<select id="queryStuInfoById" parameterType="java.lang.String" resultType="com.system.entity.Student">
+		select * from student where stu_no = #{stu_no} 
+	</select>
+	
+	<select id="queryAllStuInfo"  resultType="com.system.entity.Student" >
+		select * from student where 1 = 1
+	</select>
+	
+	<insert id="addStudent" parameterType="com.system.entity.Student">
+		insert into student (stu_no, stu_name, stu_class_no, stu_gender, stu_birth, stu_address, stu_tel, stu_remark, stu_password, stu_addtime)
+		values( #{stu_no},  #{stu_name}, #{stu_class_no}, #{stu_gender}, #{stu_birth}, #{stu_address}, #{stu_tel}, #{stu_remark}, #{stu_password}, #{stu_addtime} )
+	</insert>
+	
+	<select id="getMaxStu_no" resultType="java.lang.String">
+		select MAX(stu_no) from student
+	</select>
+	
+	<update id="saveStudent" parameterType="com.system.entity.Student">
+		update student set stu_name = #{stu_name}, stu_class_no = #{stu_class_no}, stu_gender =#{stu_gender}, stu_birth =#{stu_birth}, stu_address =#{stu_address},
+		 stu_tel =#{stu_tel}, stu_remark =#{stu_remark}, stu_password =#{stu_password} where stu_no  =#{stu_no}
+	</update>
+	
+	<delete id="deleteStu" parameterType="java.lang.String">
+		delete from student where stu_no = #{value}
+	</delete>
+
+</mapper>

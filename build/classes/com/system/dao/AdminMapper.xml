@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.AdminMapper">
+
+
+	<select id="queryAdminInfoById" parameterType="java.lang.String" resultType="com.system.entity.Admin">
+		select * from admin where admin_no = #{value} 
+	</select>
+	
+	<select id="queryAllAdminInfo"  resultType="com.system.entity.Admin" >
+		select * from admin where 1 = 1
+	</select>
+	
+	<insert id="addAdmin" parameterType="com.system.entity.Admin">
+		insert into admin (admin_no, admin_name, admin_password, admin_addtime, admin_right)values
+		(#{admin_no}, #{admin_name}, #{admin_password}, #{admin_addtime}, #{admin_right})
+	</insert>
+
+	<select id="getMaxAdmin_no" resultType="java.lang.String">
+		select MAX(admin_no) from admin
+	</select>
+	
+	<delete id="deleteAdmin" parameterType="java.lang.String">
+		delete from admin where admin_no = #{value}
+	</delete>
+	
+	<update id="saveNewPwd" parameterType="com.system.entity.Admin">
+		update admin set admin_password = #{admin_password} where admin_no = #{admin_no}
+	</update>
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.ScoreMapper">
+
+	<select id="queryAllScore" resultType="com.system.entity.Score">
+		select 
+		score.score_no as score_no,
+		score.score_num as score_num,
+		score.score_addtime as score_addtime,
+		student.stu_no as score_stu_no,
+		student.stu_name as stu_name,
+		subject.subject_no as score_subject_no,
+		subject.subject_name as subject_name
+		
+		from score, student, subject 
+		where student.stu_no = score.score_stu_no
+		and subject.subject_no = score.score_subject_no
+	</select>
+	
+	<select id="queryScoreByScore_no" resultType="com.system.entity.Score" parameterType="Integer">
+		select 
+		score.score_no as score_no,
+		score.score_num as score_num,
+		score.score_addtime as score_addtime,
+		student.stu_no as score_stu_no,
+		student.stu_name as stu_name,
+		subject.subject_no as score_subject_no,
+		subject.subject_name as subject_name
+		
+		from score, student, subject 
+		where student.stu_no = score.score_stu_no
+		and subject.subject_no = score.score_subject_no
+		and score_no = #{value}
+	</select>
+	
+	<insert id="addScore" parameterType="com.system.entity.Score">
+		insert score (score_num, score_stu_no, score_subject_no, score_addtime)
+		values( #{score_num}, #{score_stu_no}, #{score_subject_no}, #{score_addtime} )
+	</insert>
+	
+	<delete id="deleteScore" parameterType="int">
+		delete from score where score_no = #{value}
+	</delete>
+	
+	<update id="saveScore" parameterType="com.system.entity.Score">
+		update score set score_num = #{score_num}, score_stu_no = #{score_stu_no}, score_subject_no = #{score_subject_no}
+		where score_no = #{score_no}
+	</update>
+	
+	<select id="queryScoreByStu_no" parameterType="java.lang.String" resultType="com.system.entity.Score">
+		select 
+		score.score_no as score_no,
+		score.score_num as score_num,
+		score.score_addtime as score_addtime,
+		student.stu_no as score_stu_no,
+		student.stu_name as stu_name,
+		subject.subject_no as score_subject_no,
+		subject.subject_name as subject_name
+		
+		from score, student, subject 
+		where student.stu_no = score.score_stu_no
+		and subject.subject_no = score.score_subject_no
+		and score_stu_no = #{score_stu_no}
+	</select>
+
+
+
+</mapper>

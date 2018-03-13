@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.SubjectMapper">
+
+
+	<select id="querySubjectInfoById" parameterType="java.lang.String" resultType="com.system.entity.Subject">
+		select * from subject where subject_no = #{value} 
+	</select>
+	
+	<select id="queryAllSubjectInfo"  resultType="com.system.entity.Subject" >
+		select * from subject where 1 = 1
+	</select>
+	
+	<insert id="addSubject" parameterType="com.system.entity.Subject">
+		insert into subject ( subject_no, subject_name, subject_addtime )
+		values( #{subject_no}, #{subject_name}, #{subject_addtime} )
+	</insert>
+	
+	<select id="getMAXSub_no" resultType="java.lang.String">
+		select MAX(subject_no) from subject
+	</select>
+	
+	<update id="saveSubject" parameterType="com.system.entity.Subject">
+		update subject set subject_name = #{subject_name} where subject_no = #{subject_no}
+	</update>
+	
+	<delete id="deleteSub" parameterType="java.lang.String">
+		delete from subject where subject_no = #{value}
+	</delete>
+	
+
+</mapper>
